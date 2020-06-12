@@ -1,0 +1,88 @@
+
+<div class="card box">
+  <div class="card-content">
+    <h1>
+      <span class="title is-5">Genset Engine: {{engineId}}</span>
+    </h1>
+    <div>
+      <table class="table">
+        <tr>
+          <th>Coolant Temperature</th>
+          <td>&nbsp;:&nbsp;</td>
+          <td>{{ temperature  | number:'1.2-2' }} &deg; C</td>
+        </tr>
+        <tr>
+          <th>Engine Speed</th>
+          <td>&nbsp;:&nbsp;</td>
+          <td>{{ engineSpeed  | number:'1.2-2' }} rpm</td>
+        </tr>
+        <tr>
+          <th>Power Output</th>
+          <td>&nbsp;:&nbsp;</td>
+          <td>{{ powerOutput  | number:'1.2-2' }} kVA</td>
+        </tr>
+        <tr>
+          <th>Output Stream</th>
+          <td>&nbsp;:&nbsp;</td>
+          <td>{{ outputStream  | number:'1.2-2' }} A</td>
+        </tr>
+        <tr>
+          <th>Voltage 1 Phase</th>
+          <td>&nbsp;:&nbsp;</td>
+          <td>{{ vol1Phase  | number:'1.2-2' }} V</td>
+        </tr>
+        <tr>
+          <th>Voltage 3 Phase</th>
+          <td>&nbsp;:&nbsp;</td>
+          <td>{{ vol3Phase  | number:'1.2-2' }} V</td>
+        </tr>
+        <tr>
+          <th>Frequency</th>
+          <td>&nbsp;:&nbsp;</td>
+          <td>{{ frequency  | number:'1.2-2' }} Hz</td>
+        </tr>
+        <tr>
+          <th>Battery Voltage </th>
+          <td>&nbsp;:&nbsp;</td>
+          <td>{{ bateryVoltage  | number:'1.2-2' }} V</td>
+        </tr>
+        <tr>
+          <th>Oil Pressure</th>
+          <td>&nbsp;:&nbsp;</td>
+          <td>{{ oilPressure  | number:'1.2-2' }} kPa</td>
+        </tr>
+        <tr>
+          <th>Engine Hour</th>
+          <td>&nbsp;:&nbsp;</td>
+          <td>{{EngHour}} Hr</td>
+        </tr>
+        <tr>
+          <th>Genset Operation Mode Status</th>
+          <td>&nbsp;:&nbsp;</td>
+          <td>
+            <span *ngIf="gensetMode == 1" class="tag is-link">Manual</span>
+            <span *ngIf="gensetMode != 1" class="tag is-info">Automatic</span>
+          </td>
+        </tr>
+        <tr>
+          <th>Engine Status</th>
+          <td>&nbsp;:&nbsp;</td>
+          <td>
+            <span *ngIf="engineStatus == 1" class="tag is-success">On</span>
+            <span *ngIf="engineStatus != 1" class="tag is-warning">Off</span>
+          </td>
+        </tr>
+      </table>
+      <item-chart [engineId]="engineId"></item-chart>
+    </div>
+  </div>
+  <footer class="card-footer">
+    <p class="card-footer-item">
+      Footer 1
+    </p>
+    <p class="card-footer-item">
+      <a class="button is-dark" (click)="gotoDetails(engineId)">More Details</a>
+    </p>
+  </footer>
+</div>
+

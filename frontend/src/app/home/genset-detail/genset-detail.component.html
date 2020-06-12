@@ -1,0 +1,241 @@
+<nav-bar></nav-bar>
+<div class="block">
+  <div class="card">
+    <div class="card-content">
+      <div class="block" *ngIf="data">
+          <h4 class="title is-5">GENSET {{data.genset_ASI_genset_name}} ({{id}}) SPECIFICATION</h4>
+      </div>
+        <table class="table" *ngIf="data">
+          <tr>
+            <th>DIESEL ENGINE</th>
+            <td></td>
+            <th>Voltage Allowance(1 Phase)</th>
+            <td>{{data.genset_ASI_genset_voltage_allowance}}</td>
+          </tr>
+          <tr>
+            <th>Make,Model,Type</th>
+            <td>{{data.genset_ASI_genset_details}}</td>
+            <th>Starting system</th>
+            <td>{{data.genset_ASI_genset_starting_system}}</td>
+          </tr>
+          <tr>
+            <th>Design Features</th>
+            <td>{{data.genset_ASI_genset_design_features}}</td>
+            <th>Fuel Tank Capacity</th>
+            <td>{{data.genset_ASI_genset_tank_capacity}}(L)</td>
+          </tr>
+          <tr>
+            <th>Displacement</th>
+            <td>{{data.genset_ASI_genset_displacement}}</td>
+            <th>Fuel Consumption Full load</th>
+            <td>{{data.genset_ASI_genset_full_load_consumption}} L/hrs</td>
+          </tr>
+          <tr>
+            <th>Bore x stroke</th>
+            <td>{{data.genset_ASI_genset_bore_stroke}}</td>
+            <th>3/4 Load</th>
+            <td>{{data.genset_ASI_genset_three_quarter_load_consumption}} L/hrs</td>
+          </tr>
+          <tr>
+            <th>Continuous rated output</th>
+            <td>{{data.genset_ASI_genset_continuous_rated_output}} L/hrs</td>
+            <th>1/2 Load</th>
+            <td>{{data.genset_ASI_genset_half_load_consumption}} L/hrs</td>
+          </tr>
+          <tr>
+            <th>Starting System</th>
+            <td>{{data.genset_ASI_genset_starting_system}} L/hrs</td>
+            <th>1/4 Load</th>
+            <td>{{data.genset_ASI_genset_quarter_load_consumption}} L/hrs</td>
+          </tr>
+        </table>
+
+        <table>
+          <tr>
+            <td colspan="4" class="is-right">
+              <button class="button is-warning" (click)="openModals()">Update Genset Details</button>
+            </td>
+          </tr>
+        </table>
+    </div>
+  </div>
+</div>
+<div class="block">
+    <div class="columns is-multiline is-centered">
+      <div class="column is-three-quarters">
+        <div class="block" >
+          <div class="tabs is-boxed">
+            <ul>
+              <li [class.is-active]="realtime == 1"><a (click)="realtimeClicked()">Realtime Charts</a></li>
+              <li [class.is-active]="historical == 1"><a (click)="historicalClicked()">Historical Charts</a></li>
+              <li [class.is-active]="map == 1"><a (click)="mapClicked()">Map Routes</a></li>
+            </ul>
+          </div>
+            <div class="card">
+                <div class="card-content">
+                    <section class="tab-content" [class.is-hidden]="realtime == 0" *ngIf="id !== undefined" >
+                        <item-chart [engineId]="id"></item-chart>
+                    </section>
+                    <section class="tab-content" [class.is-hidden]="historical == 0" *ngIf="id !== undefined" >
+                        <item-stock-chart [engineId]="id"></item-stock-chart>
+                    </section>
+                    <section class="tab-content" [class.is-hidden]="map == 0" *ngIf="id !== undefined" >
+                      <item-maps [engineId]="id"></item-maps>
+                    </section>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="column is-one-quarter position-top">
+          <div class="card">
+              <div class="card-content">
+                  <h1 class="is-size-4">Statistics</h1>
+                  <div class="buttons">
+                    <button class="button is-small" [class.is-light]="week == 1" (click)="weekClicked()">Weekly</button>
+                    <button class="button is-small" [class.is-light]="month == 1" (click)="monthClicked()">Monthly</button>
+                    <button class="button is-small" [class.is-light]="year == 1" (click)="yearClicked()">Yearly</button>
+                  </div>
+              </div>
+          </div>
+          <div class="card">
+              <div class="card-content">
+                <div class="columns is-centered">
+                  <div class="column" >
+                      <h1 class="is-size-7">Temperature(AVG)</h1>
+                  </div>
+                  <div class="column"  *ngIf="AvgData">
+                      <h1 class="is-size-3" >{{AvgData.temp | number: '1.1-2'}}&deg;C</h1>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="card">
+              <div class="card-content">
+                <div class="columns is-centered">
+                  <div class="column">
+                      <h1 class="is-size-7">Engine Off</h1>
+                  </div>
+                  <div class="column" *ngIf="AvgData">
+                      <h1 class="is-size-3" >{{AvgData.engine_off}}</h1>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<div id="formGensetModal" class="modal" [class.is-active]="showModals == 1">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Update Genset Data</p>
+      <button class="delete" aria-label="close" (click)="closeModals()"></button>
+    </header>
+    <section class="modal-card-body">
+      <form [formGroup]="gensetForm" method="POST" (ngSubmit)="submitForm()">
+
+        <div class="field">
+          <label class="label">Genset Name</label>
+          <div class="control">
+            <input class="input" type="text" formControlName="name" placeholder="Genset Name">
+            <input *ngIf="id !== undefined"  type="hidden" formControlName="Id" value="id">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Make,Model,Type</label>
+          <div class="control">
+            <input class="input" type="text" formControlName="detail" placeholder="Make,Model,Type">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Design Features</label>
+          <div class="control">
+            <input class="input" type="text" formControlName="design_features" placeholder="Design Features">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Displacement</label>
+            <div class="control">
+              <input class="input" type="text" formControlName="displacement" placeholder="Displacement">
+            </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Bore x stroke</label>
+          <div class="control">
+            <input class="input" type="text" formControlName="bore_stroke" placeholder="Bore x stroke">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Continuous rated output</label>
+          <div class="control">
+            <input class="input" type="number" step="0.01" formControlName="continuous_rated_output" placeholder="Continuous rated output">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Starting System</label>
+          <div class="control">
+            <input class="input" type="text" formControlName="starting_system" placeholder="Starting System">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Voltage Allowance(1 Phase)</label>
+          <div class="control">
+            <input class="input" type="text" formControlName="voltage_allowance" placeholder="Voltage Allowance(1 Phase)">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Fuel Tank Capacity</label>
+          <div class="control">
+            <input class="input" type="number" step="0.01" formControlName="tank_capacity" placeholder="Fuel Tank Capacity">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Fuel Consumption Full Load</label>
+          <div class="control">
+            <input class="input" type="number" step="0.01" formControlName="full_load_consumption" placeholder="Fuel Consumption Full Load">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">3/4 Load</label>
+          <div class="control">
+            <input class="input" type="number" step="0.01" formControlName="three_quarter_load_consumption" placeholder="3/4 Load">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">1/2 Load</label>
+          <div class="control">
+            <input class="input" type="number" step="0.01" formControlName="half_load_consumption" placeholder="1/2 Load">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">1/4 Load</label>
+          <div class="control">
+            <input class="input" type="number" step="0.01" formControlName="quarter_load_consumption" placeholder="1/4 Load">
+          </div>
+        </div>
+        <div class="field">
+          <button type="submit" class="button is-success">Save changes</button>
+          <button type="reset" class="button" (click)="closeModals()">Cancel</button>
+        </div>
+      </form>
+    </section>
+    <footer class="modal-card-foot">
+
+    </footer>
+  </div>
+</div>

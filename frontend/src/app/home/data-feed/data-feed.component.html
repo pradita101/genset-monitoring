@@ -1,0 +1,5 @@
+<div *ngIf="feeds">
+    <div class="notification" *ngFor="let feed of feeds">
+        <p>Genset {{feed.A}}<br/>Temperature {{feed.Q   | number:'1.2-2' }}&deg;C<br/>{{feed.B}}</p>
+      </div>
+</div>

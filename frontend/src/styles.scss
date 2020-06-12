@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+@charset "utf-8";
+@import "../node_modules/leaflet/dist/leaflet.css";
+@import "../node_modules/leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
+@import "../node_modules/@fortawesome/fontawesome-free/css/fontawesome.css";
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+@import "../node_modules/animate.css/animate.css";
+
+
+
+$yellow: #ffbf00;
+$green: #07747E;
+// $primary: #002366;
+$footer-background-color: $yellow;
+$footer-padding: 0.75rem 0.75rem 0.75rem;
+$fullhd-enabled: true;
+
+@import "../node_modules/bulma/bulma.sass";
+// @import '../node_modules/bulma-extensions/bulma-switch/src/sass/index';
+@import '../node_modules/bulma-extensions/bulma-tooltip/src/sass/index';
+// @import '../node_modules/bulma-extensions/bulma-calendar/src/sass/index';
+// @import "../node_modules/bulma-calendar/src/sass/index.sass";
+// @import "../node_modules/bulma-calendar/src/sass/timepicker.sass";
+// @import "../node_modules/ng-pick-datetime/assets/style/picker.min.css";
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap");
+
+.is-green {
+  color: $green;
+}
+
+
+
+.box{
+  border-radius: 0px;
+}
+

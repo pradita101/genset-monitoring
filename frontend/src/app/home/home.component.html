@@ -1,0 +1,16 @@
+<div class="block"><nav-bar></nav-bar></div>
+<div class="block">
+  <div class="container animated fadeIn">
+    <div class="columns is-multiline is-centered">
+      <div class="column">
+        <div class="block" *ngIf="ids" id="detail-cards">
+          <div class="columns animated fadeIn" *ngFor="let row of rows; let i = index">
+            <div class="column is-4" *ngFor="let id of row">
+              <info-card [engineId]="id"></info-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

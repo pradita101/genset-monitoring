@@ -1,0 +1,68 @@
+<nav-bar></nav-bar>
+<div class="block">
+  <div class="card">
+    <div class="card-content">
+      <form method="POST" [formGroup]="usersGroup" class="box">
+
+        <div class="field">
+          <label class="label">Username</label>
+          <div class="control">
+            <input type="text" name="username" formControlName="username" class="input" size="128" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">E-mail</label>
+          <div class="control">
+            <input type="text" email name="email" size="128" formControlName="email" class="input" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">User Status</label>
+          <div class="control">
+            <label class="radio">
+              <input type="radio" name="status" formControlName="status" value="1">
+              Active
+            </label>
+            <label class="radio">
+              <input type="radio" name="status" formControlName="status" value="0">
+              Deactive
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">User Type</label>
+          <div class="control">
+            <div class="select">
+              <select formControlName="user_type">
+                <option *ngFor="let type of usersType" [ngValue]="type.typeCode">
+                  {{ type.typeName }}
+                 </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Password</label>
+          <div class="control">
+            <input type="password" name="password" size="128" formControlName="password" class="input" required>
+          </div>
+        </div>
+
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-link" (click) = "submitData()">Submit</button>
+          </div>
+          <div class="control">
+            <button type="reset" class="button is-link is-light">Cancel</button>
+          </div>
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+</div>

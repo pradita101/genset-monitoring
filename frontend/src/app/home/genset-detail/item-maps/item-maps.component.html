@@ -1,0 +1,25 @@
+<div class="field is-horizontal">
+    <div class="field-label is-small">
+        <label class="label">Select Date</label>
+    </div>
+    <div class="field-body">
+        <div class="field">
+            <div class="control has-icons-right">
+                <input class="input is-info" [owlDateTime]="dt1" [selectMode]="'range'" [(ngModel)]="filterDate" [owlDateTimeTrigger]="dt1" placeholder="Date Time"/>
+                <span class="icon is-small is-right">
+                    <owl-date-time #dt1></owl-date-time>
+                    <i class="fas fa-calendar" [owlDateTimeTrigger]="dt1"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="field-label is-small">
+        <label class="label"> </label>
+    </div>
+    <div class="field-body">
+        <button class="button" (click)="onClick()">Generate Route</button>
+    </div>
+</div>
+<br/>
+
+<div id="items-map"></div>
