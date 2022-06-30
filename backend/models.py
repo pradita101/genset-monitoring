@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+''' class model for Postgressql '''
+
 import sqlalchemy as db
 from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.sql import func
