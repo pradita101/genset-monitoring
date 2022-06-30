@@ -1,6 +1,11 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+'''
+MQTT Text parser
+
+'''
+
 import time
 import paho.mqtt.client as mqtt  # import the client1
 import asyncio
