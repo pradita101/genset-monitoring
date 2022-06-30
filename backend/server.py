@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+''' REST API Service '''
+
 from tornado.web import Application, RequestHandler
 from tornado.ioloop import IOLoop
 import tornado.web
