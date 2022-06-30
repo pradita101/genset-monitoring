@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+''' JWT Token Generator '''
+
 import string
 import random
 import datetime,time
