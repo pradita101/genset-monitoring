@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+''' Web Socket Server '''
+
 import asyncio
 import websockets
 import configparser
