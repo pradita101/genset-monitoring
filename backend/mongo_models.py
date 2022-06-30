@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+''' class model for mongodb to backup raw data from MQTT '''
+
 import sys, traceback
 import pymongo
 import bson
